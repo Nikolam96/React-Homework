@@ -1,5 +1,5 @@
 import React from "react";
-import { movies } from "./assets/Movies";
+import { movies } from "./componets/Movies";
 import { Movie } from "./componets/Movie";
 
 function App() {
