@@ -1,14 +1,65 @@
 import { useState } from "react";
-import Traning from "./Traning";
 import Input from "./Input";
 import { v4 as V4 } from "uuid";
 
 const Table = () => {
-  const [users, setUsers] = useState([...Traning]);
+  const [users, setUsers] = useState([
+    { id: 1, name: "Pero", lastName: "Perovski", year: 1996 },
+    { id: 2, name: "Ivan", lastName: "Ivanovski", year: 1997 },
+    { id: 3, name: "Stefan", lastName: "Stefanovski", year: 1998 },
+  ]);
   const [editingId, setEditingId] = useState(null);
   const [editingName, setEditingName] = useState("");
   const [editinglastName, setEditinglastName] = useState("");
-  const [editingAge, setEditingYear] = useState(0);
+  const [editingYear, setEditingYear] = useState(0);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const name = e.target[0].value;
+    const lastName = e.target[1].value;
+    const year = e.target[2].value;
+
+    if (!name.trim() || !lastName.trim() || !year) {
+      alert("Invalid Inputs");
+    } else {
+      setUsers((prev) => [
+        ...prev,
+        {
+          id: V4(),
+          name: name,
+          lastName: lastName,
+          year: year,
+        },
+      ]);
+      e.target.reset();
+    }
+  }
+
+  function handleEdit(id, name, lastName, year) {
+    setEditingId(id);
+    setEditingName(name);
+    setEditinglastName(lastName);
+    setEditingYear(year);
+  }
+
+  function handleSave(id) {
+    changeName(id, editingName, editinglastName, editingYear);
+    setEditingId(null);
+  }
+
+  function deleteUser(id) {
+    setUsers((prev) => prev.filter((v) => v.id !== id));
+  }
+
+  function changeName(id, newName, newLastName, newYear) {
+    setUsers((prev) =>
+      prev.map((item) =>
+        item.id === id
+          ? { ...item, name: newName, lastName: newLastName, year: newYear }
+          : item
+      )
+    );
+  }
 
   return (
     <>
@@ -25,113 +76,60 @@ const Table = () => {
           </tr>
         </thead>
         <tbody>
-          {users.map(({ id, name, lastName, year }, i) => (
-            <tr key={id}>
-              <td>{i + 1}</td>
-              <td>
-                {editingId === id ? (
-                  <input
-                    type="text"
-                    value={editingName}
-                    onChange={(e) => setEditingName(e.target.value)}
-                  />
-                ) : (
-                  name
-                )}
-              </td>
-              <td>
-                {editingId === id ? (
-                  <input
-                    type="text"
-                    value={editinglastName}
-                    onChange={(e) => setEditinglastName(e.target.value)}
-                  />
-                ) : (
-                  lastName
-                )}
-              </td>
-              <td>
-                {editingId === id ? (
-                  <input
-                    type="text"
-                    value={editingAge}
-                    onChange={(e) => setEditingYear(e.target.value)}
-                  />
-                ) : (
-                  year
-                )}
-              </td>
-              <td>
-                {editingId === id ? (
+          {users.map(({ id, name, lastName, year }, i) => {
+            return (
+              <tr key={id}>
+                <td>{i + 1}</td>
+                {id === editingId ? (
                   <>
-                    <button onClick={() => handleSave(id)}>Save</button>
-                    <button onClick={() => setEditingId(null)}>Cencel</button>
+                    <td>
+                      <input
+                        type="text"
+                        value={editingName}
+                        onChange={(e) => setEditingName(e.target.value)}
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        value={editinglastName}
+                        onChange={(e) => setEditinglastName(e.target.value)}
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        value={editingYear}
+                        onChange={(e) => setEditingYear(e.target.value)}
+                      />
+                    </td>
+                    <td>
+                      <button onClick={() => handleSave(id)}>Save</button>
+                      <button onClick={() => setEditingId(null)}>Cancel</button>
+                    </td>
                   </>
                 ) : (
                   <>
-                    <button
-                      onClick={() => handleEdit(id, name, lastName, year)}
-                    >
-                      Edit
-                    </button>
-                    <button onClick={() => deleteUser(id)}>Delete</button>
+                    <td>{name}</td>
+                    <td>{lastName}</td>
+                    <td>{year}</td>
+                    <td>
+                      <button
+                        onClick={() => handleEdit(id, name, lastName, year)}
+                      >
+                        Edit
+                      </button>
+                      <button onClick={() => deleteUser(id)}>Delete</button>
+                    </td>
                   </>
                 )}
-              </td>
-            </tr>
-          ))}
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </>
   );
-
-  function changeName(id, newName, newLastName, newYear) {
-    setUsers((prev) =>
-      prev.map((item) =>
-        item.id === id
-          ? { ...item, name: newName, lastName: newLastName, year: newYear }
-          : item
-      )
-    );
-  }
-
-  function handleEdit(id, name, lastName, year) {
-    setEditingId(id);
-    setEditingName(name);
-    setEditinglastName(lastName);
-    setEditingYear(year);
-  }
-
-  function handleSave(id) {
-    changeName(id, editingName, editinglastName, editingAge);
-    setEditingId(null);
-  }
-
-  function deleteUser(id) {
-    setUsers((prev) => prev.filter((v) => v.id !== id));
-  }
-
-  function handleSubmit(e) {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const name = formData.get("name");
-    const lastName = formData.get("lastName");
-    const year = formData.get("year");
-
-    if (!name.trim() || !lastName.trim() || !year) {
-      alert("Invalid Inputs");
-    } else {
-      setUsers((prevTraning) => [
-        ...prevTraning,
-        {
-          id: V4(),
-          name: name,
-          lastName: lastName,
-          year: year,
-        },
-      ]);
-      e.target.reset();
-    }
-  }
 };
+
 export default Table;

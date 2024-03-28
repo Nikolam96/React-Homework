@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Input from "./Input";
 import Select from "./Select";
 import Dropdown from "./Dropdown";
 
-const Login = () => {
+export const Login = () => {
   const [username, setusername] = useState("");
   const [password, setpassword] = useState("");
   const [comment, setcomment] = useState("");
@@ -62,9 +62,9 @@ const Login = () => {
           render={longComment}
           changeRender={setLongComment}
         />
+        <Dropdown elements={elements} />
         <button>Sing In</button>
       </form>
     </>
   );
 };
-export default Login;
