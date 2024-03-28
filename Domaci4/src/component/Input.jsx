@@ -1,9 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import PropTypes from "prop-types";
 import "../assets/index.css";
 
 //* Testiram sa submit,ali moze umesto onSubmit/onChange
 
 export function Input() {
+  const previousInputValue = useRef("");
+
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
