@@ -1,3 +1,5 @@
+import "../assets/input.css";
+
 const Input = ({ handleSubmit }) => {
   return (
     <>
