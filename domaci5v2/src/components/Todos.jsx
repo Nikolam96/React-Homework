@@ -2,97 +2,100 @@ import PropTypes from "prop-types";
 import { useState } from "react";
 
 const Todos = ({ todos, changeCheck, deleteTodo, handleSave }) => {
-  const [hideC, setHideC] = useState(true);
+  const [hideCompleted, setHideCompleted] = useState(false);
   const [editingId, setEditingId] = useState(null);
   const [newInput, setNewInput] = useState("");
 
+  const handleToggleCompleted = () => {
+    setHideCompleted(!hideCompleted);
+  };
+
   return (
     <>
-      {todos.length >= 1 ? (
+      {todos.length > 0 ? (
         <table border={1}>
           <thead>
             <tr>
               <th>ID</th>
               <th>Item</th>
-              {hideC && <th>Completed</th>}
+              <th>Completed</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
-            {todos.map((v, i) => {
-              return (
-                <tr key={v.id}>
-                  <td>{i + 1}</td>
-                  <td>
-                    {editingId === v.id ? (
-                      <input
-                        type="text"
-                        value={newInput}
-                        onChange={(e) => setNewInput(e.target.value)}
-                      />
-                    ) : (
-                      v.item
-                    )}
-                  </td>
-                  {hideC && (
-                    <td>
-                      <input
-                        type="checkbox"
-                        checked={v.completed}
-                        onChange={() => changeCheck(v.id)}
-                      />
-                    </td>
+            {todos.map((todo, index) => (
+              <tr
+                key={todo.id}
+                style={{
+                  display:
+                    hideCompleted && todo.completed ? "none" : "table-row",
+                }}
+              >
+                <td>{index + 1}</td>
+                <td>
+                  {editingId === todo.id ? (
+                    <input
+                      type="text"
+                      value={newInput}
+                      onChange={(e) => setNewInput(e.target.value)}
+                    />
+                  ) : (
+                    todo.item
                   )}
-                  <td>
-                    {editingId ? (
-                      <>
-                        <button
-                          onClick={() => {
-                            handleSave(editingId, newInput);
-                            setEditingId(null);
-                          }}
-                        >
-                          Save
-                        </button>
-                        <button onClick={() => setEditingId(null)}>
-                          Cencel
-                        </button>
-                      </>
-                    ) : (
-                      <>
-                        <button onClick={() => deleteTodo(v.id)}>Delete</button>
-                        <button
-                          onClick={() => {
-                            setEditingId(v.id);
-                            setNewInput(v.item);
-                          }}
-                        >
-                          Edit
-                        </button>
-                      </>
-                    )}
-                  </td>
-                </tr>
-              );
-            })}
+                </td>
+                <td>
+                  <input
+                    type="checkbox"
+                    checked={todo.completed}
+                    onChange={() => changeCheck(todo.id)}
+                  />
+                </td>
+                <td>
+                  {editingId === todo.id ? (
+                    <>
+                      <button
+                        onClick={() => {
+                          handleSave(editingId, newInput);
+                          setEditingId(null);
+                        }}
+                      >
+                        Save
+                      </button>
+                      <button onClick={() => setEditingId(null)}>Cancel</button>
+                    </>
+                  ) : (
+                    <>
+                      <button onClick={() => deleteTodo(todo.id)}>
+                        Delete
+                      </button>
+                      <button
+                        onClick={() => {
+                          setEditingId(todo.id);
+                          setNewInput(todo.item);
+                        }}
+                      >
+                        Edit
+                      </button>
+                    </>
+                  )}
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       ) : (
-        <h1>No item is added to array yet!</h1>
+        <h1>No items are added to the array yet!</h1>
       )}
-      {hideC && (
-        <h1>
-          Number of Complited Tasks{" "}
-          {todos.filter((v) => v.completed !== false).length}
-        </h1>
-      )}
-      <button onClick={() => setHideC(!hideC)}>
-        {hideC ? "Hide" : "Show"} Complited
+      <h1>
+        Number of Completed Tasks:{" "}
+        {todos.filter((todo) => todo.completed).length}
+      </h1>
+      <button onClick={handleToggleCompleted}>
+        {hideCompleted ? "Show" : "Hide"} Completed
       </button>
     </>
   );
 };
-export default Todos;
 
 Todos.propTypes = {
   todos: PropTypes.arrayOf(PropTypes.object),
@@ -100,3 +103,5 @@ Todos.propTypes = {
   deleteTodo: PropTypes.func,
   handleSave: PropTypes.func,
 };
+
+export default Todos;

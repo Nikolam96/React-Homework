@@ -23,14 +23,12 @@ const Post = () => {
 
   const saveChanges = async () => {
     try {
-      const response = await axios.patch(
-        `https://jsonplaceholder.typicode.com/posts/${id}`,
-        { ...details, title: title, body: body }
-      );
-      console.log(response.data);
+      await axios.patch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
+        title: title,
+        body: body,
+      });
       alert("Changes saved successfully!");
     } catch (error) {
-      console.error(error);
       alert("Failed to save changes.");
     } finally {
       setEditing(false);

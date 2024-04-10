@@ -5,35 +5,36 @@ function App() {
   const [todos, setTodos] = useState([]);
   const [todo, setTodo] = useState("");
 
-  function handleTodo(e) {
+  const handleTodo = (e) => {
     e.preventDefault();
     if (!todo.trim()) {
-      return alert("Invalid Input");
+      alert("Invalid Input");
+      return;
     }
     setTodos([
       ...todos,
       { id: Math.random() * 1000, item: todo, completed: false },
     ]);
     setTodo("");
-  }
+  };
 
-  function changeCheck(id) {
+  const changeCheck = (id) => {
     setTodos(
-      todos.map((v) => (id === v.id ? { ...v, completed: !v.completed } : v))
+      todos.map((todo) =>
+        id === todo.id ? { ...todo, completed: !todo.completed } : todo
+      )
     );
-  }
+  };
 
-  function deleteTodo(id) {
-    setTodos(todos.filter((v) => v.id !== id));
-  }
+  const deleteTodo = (id) => {
+    setTodos(todos.filter((todo) => todo.id !== id));
+  };
 
-  function handleSave(id, item) {
+  const handleSave = (id, item) => {
     setTodos(
-      todos.map((v) => {
-        return v.id === id ? { ...v, item: item } : v;
-      })
+      todos.map((todo) => (todo.id === id ? { ...todo, item: item } : todo))
     );
-  }
+  };
 
   return (
     <>
@@ -42,12 +43,7 @@ function App() {
         onChange={(e) => setTodo(e.target.value)}
         value={todo}
       />
-      <input
-        type="submit"
-        value={"Add Todos"}
-        onClick={handleTodo}
-        onChange={() => setCheck}
-      />
+      <input type="submit" value={"Add Todos"} onClick={handleTodo} />
       <Todos
         todos={todos}
         changeCheck={changeCheck}

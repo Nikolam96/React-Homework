@@ -9,9 +9,12 @@ const Table = () => {
     { id: 3, name: "Stefan", lastName: "Stefanovski", year: 1998 },
   ]);
   const [editingId, setEditingId] = useState(null);
-  const [editingName, setEditingName] = useState("");
-  const [editinglastName, setEditinglastName] = useState("");
-  const [editingYear, setEditingYear] = useState(0);
+  const [editingObj, setEditingObj] = useState({
+    id: users.length + 1,
+    name: "",
+    lastName: "",
+    year: 0,
+  });
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -37,13 +40,12 @@ const Table = () => {
 
   function handleEdit(id, name, lastName, year) {
     setEditingId(id);
-    setEditingName(name);
-    setEditinglastName(lastName);
-    setEditingYear(year);
+    setEditingObj({ name: name, lastName: lastName, year: year });
   }
 
   function handleSave(id) {
-    changeName(id, editingName, editinglastName, editingYear);
+    const { name, lastName, year } = editingObj;
+    changeName(id, name, lastName, year);
     setEditingId(null);
   }
 
@@ -85,22 +87,31 @@ const Table = () => {
                     <td>
                       <input
                         type="text"
-                        value={editingName}
-                        onChange={(e) => setEditingName(e.target.value)}
+                        value={editingObj.name}
+                        onChange={(e) =>
+                          setEditingObj({ ...editingObj, name: e.target.value })
+                        }
                       />
                     </td>
                     <td>
                       <input
                         type="text"
-                        value={editinglastName}
-                        onChange={(e) => setEditinglastName(e.target.value)}
+                        value={editingObj.lastName}
+                        onChange={(e) =>
+                          setEditingObj({
+                            ...editingObj,
+                            lastName: e.target.value,
+                          })
+                        }
                       />
                     </td>
                     <td>
                       <input
                         type="text"
-                        value={editingYear}
-                        onChange={(e) => setEditingYear(e.target.value)}
+                        value={editingObj.year}
+                        onChange={(e) =>
+                          setEditingObj({ ...editingObj, year: e.target.value })
+                        }
                       />
                     </td>
                     <td>

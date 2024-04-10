@@ -36,7 +36,6 @@ const Posts = () => {
           body: body,
         }
       );
-      alert("Status : 200");
       setPosts([...posts, response.data]);
       setTitle("");
       setBody("");

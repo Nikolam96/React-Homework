@@ -10,7 +10,6 @@ const Todos = () => {
       );
       let data = await response.json();
       setTodos(data);
-      console.log(data);
     } catch (error) {
       alert("error:" + error.message);
     }
