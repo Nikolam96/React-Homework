@@ -1,0 +1,4 @@
+export const TODOS_RESOLVE = "TODOS_RESOLVE";
+export const TODOS_REJECT = "TODOS_REJECT";
+export const TODOS_CHECKED = "TODOS_CHECKED";
+export const TODOS_CHANGE = "TODOS_CHANGE";
