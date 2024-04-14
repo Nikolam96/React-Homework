@@ -11,6 +11,7 @@ const TodosFunc = () => {
   const todos = useSelector((state) => state.TodosReducer.todos);
   const [newTodo, setNewTodo] = useState("");
   const [todoId, setId] = useState("");
+  const [hideCheck, setHideCheck] = useState(false);
 
   useEffect(() => {
     dispatch(fetchTodos());
@@ -18,11 +19,16 @@ const TodosFunc = () => {
 
   return (
     <div>
+      <button onClick={() => setHideCheck(!hideCheck)}>hideCheck</button>
       {todos.map(({ id, title, completed }) => {
         return (
           <div key={id}>
             <ol>
-              <li>
+              <li
+                style={{
+                  display: hideCheck && completed ? "none" : "list-item",
+                }}
+              >
                 {todoId === id ? (
                   <>
                     <input
