@@ -1,0 +1,60 @@
+{
+  "users": [
+    {
+      "username": "filip",
+      "password": "qwerty"
+    },
+    {
+      "username": "test",
+      "password": "test"
+    },
+    {
+      "username": "john",
+      "password": "123456"
+    },
+    {
+      "username": "alice",
+      "password": "password123"
+    },
+    {
+      "username": "trpe",
+      "password": "trpe"
+    },
+    {
+      "username": "user1",
+      "password": "123"
+    },
+    {
+      "username": "nikola",
+      "password": "nikola"
+    },
+    {
+      "username": "nikolam96",
+      "password": "54c242vg"
+    },
+    {
+      "username": "Nikolam96",
+      "password": "54c242vg"
+    },
+    {
+      "username": "niko",
+      "password": "niko"
+    },
+    {
+      "username": "aa",
+      "password": "aa"
+    },
+    {
+      "username": "aaw",
+      "password": "aaw"
+    },
+    {
+      "username": "www",
+      "password": "wwww",
+      "firstName": "wdawda",
+      "lastName": "wdawdawd",
+      "age": "22",
+      "weight": "22"
+    }
+  ]
+}
