@@ -10,7 +10,10 @@ const TestFunc = () => {
   }
 
   function dontChangeMe() {
-    dispatch(NewAction());
+    dispatch({
+      type: "test",
+      payload: "Now im Noob in Redux,jk just a new Action hehe!",
+    });
   }
 
   return (

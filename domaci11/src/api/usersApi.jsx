@@ -11,11 +11,9 @@ export const getUsers = async () => {
   }
 };
 
-export const deleteUser = async (id) => {
-  try {
-    await axios.delete(`${api.root}/users/${id}`);
-    return await Promise.resolve(id);
-  } catch (err) {
-    return await Promise.reject(err);
-  }
+export const deleteUser = (id) => {
+  return axios
+    .delete(`${api.root}/users/${id}`)
+    .then((res) => Promise.resolve(id)) //{}
+    .catch((err) => Promise.reject(err));
 };

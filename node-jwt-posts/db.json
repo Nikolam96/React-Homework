@@ -2,28 +2,33 @@
   "posts": [
     {
       "id": 1,
-      "author": "Filip",
+      "author": "Nikola123",
       "post": "Hello, this is a sample post."
     },
     {
       "id": 2,
-      "author": "Test",
+      "author": "Test2",
       "post": "This is another post."
     },
     {
       "id": 3,
-      "author": "John",
+      "author": "John2",
       "post": "This is John's post."
     },
     {
       "id": 4,
-      "author": "Alice",
+      "author": "Alice2",
       "post": "Alice's post here."
     },
     {
       "id": 5,
       "author": "Filip",
       "post": "123"
+    },
+    {
+      "id": 6,
+      "author": "www",
+      "post": "222"
     }
   ]
 }

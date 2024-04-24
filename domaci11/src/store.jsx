@@ -1,18 +1,16 @@
-import { configureStore } from "@reduxjs/toolkit";
-import logger from "redux-logger";
-import { usersReducer } from "./components/users/duck";
-import { authReducer } from "./components/auth/duck";
-import { photosReducer } from "./components/photos/duck";
-import { todosReducer } from "./components/todos/duck";
+import {configureStore} from '@reduxjs/toolkit';
+import logger from 'redux-logger';
+import { usersReducer } from './components/users/duck';
+import { authReducer } from './components/auth/duck';
+import { postsReducer } from './components/posts/duck';
 
 const reducer = {
-  usersReducer: usersReducer,
-  authReducer: authReducer,
-  photosReducer: photosReducer,
-  todosReducer: todosReducer,
-};
+    usersReducer:usersReducer,
+    authReducer:authReducer,
+    postsReducer:postsReducer
+}
 
 export default configureStore({
-  reducer: reducer,
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
+    reducer:reducer,
+    middleware: (getDefaultMiddleware)=>getDefaultMiddleware().concat(logger)
 });

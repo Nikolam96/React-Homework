@@ -10,6 +10,7 @@ import { getUsers, deleteUser } from "./../../../api/usersApi";
 
 export const fetchUsers = (requestParams) => {
   return (dispatch) => {
+    console.log(dispatch)
     dispatch(fetchUsersRequest(requestParams));
     return getUsers(requestParams)
       .then((res) => {

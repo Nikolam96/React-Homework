@@ -46,7 +46,7 @@ app.get("/posts", verifyToken, (req, res) => {
 });
 
 // Update post endpoint with JWT authentication
-app.put("/posts/:id", verifyToken, (req, res) => {
+app.patch("/posts/:id", verifyToken, (req, res) => {
   const postId = parseInt(req.params.id);
   const { author, post } = req.body;
 
