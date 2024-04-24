@@ -12,7 +12,6 @@ export const getPosts = async (token) => {
       headers: headers,
     });
     const json = await res.json();
-    console.log(json);
     if (json.message) {
       throw new Error(json.message);
     }
