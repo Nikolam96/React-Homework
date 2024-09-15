@@ -1,0 +1,17 @@
+h3 {
+  color: rgb(190, 120, 255);
+  padding: 5px;
+}
+
+.city-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+img {
+  width: 200px;
+  height: 150px;
+  padding: 5px;
+  border-radius: 10px;
+}

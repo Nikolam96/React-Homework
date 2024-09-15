@@ -1,0 +1,22 @@
+* {
+  font-family: Verdana, Tahoma, sans-serif;
+  color: black;
+}
+
+table tr th {
+  background-color: rgb(194, 242, 194);
+}
+
+table tr td {
+  background-color: rgb(231, 238, 240);
+}
+
+img {
+  width: 280px;
+  height: 350px;
+  border-radius: 20px;
+}
+
+a {
+  text-decoration: none;
+}
